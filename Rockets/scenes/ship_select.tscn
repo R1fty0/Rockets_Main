@@ -106,10 +106,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -196.0
-offset_top = -196.0
-offset_right = 200.0
-offset_bottom = -44.0
+offset_left = -197.0
+offset_top = -203.0
+offset_right = 199.0
+offset_bottom = -51.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
@@ -242,6 +242,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
 
 [node name="LeftArrow" type="TextureRect" parent="ShipVisualBox"]
+layout_mode = 0
 offset_left = -55.0
 offset_top = 61.0
 offset_right = 9.0
