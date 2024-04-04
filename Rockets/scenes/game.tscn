@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhvgka4fyi3cf"]
+
+[ext_resource type="Script" path="res://scripts/time_alive_timer.gd" id="2_0cuol"]
+[ext_resource type="PackedScene" uid="uid://cqhot66fbv6a6" path="res://scenes/player.tscn" id="2_yh7y4"]
+[ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="3_0ffh5"]
+[ext_resource type="PackedScene" uid="uid://bq3t7s2s0rduq" path="res://scenes/missle.tscn" id="4_t7whk"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_17twy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2dnjk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56lyl"]
+bg_color = Color(0, 0.662745, 0.835294, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l6m2y"]
+font_size = 40
+outline_size = 2
+outline_color = Color(0.243137, 0.258824, 0.329412, 1)
+
+[node name="Game" type="Node"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0ffh5")
+
+[node name="BoostLabel" type="Label" parent="UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -135.0
+offset_top = -80.0
+offset_right = 136.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Boost"
+label_settings = SubResource("LabelSettings_2dnjk")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BoostMeter" type="ProgressBar" parent="UI/BoostLabel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = 2.0
+offset_right = -0.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_56lyl")
+step = 1.0
+show_percentage = false
+
+[node name="TimeAliveTimer" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_top = 45.0
+offset_right = 134.0
+offset_bottom = 112.32
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 1
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_l6m2y")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_0cuol")
+
+[node name="Player" parent="." instance=ExtResource("2_yh7y4")]
+
+[node name="Missle" parent="." instance=ExtResource("4_t7whk")]
+z_index = 1
+position = Vector2(108, 116)
+missle_speed = 200.0
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_17twy")

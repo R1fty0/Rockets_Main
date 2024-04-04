@@ -1,0 +1,164 @@
+[gd_scene load_steps=10 format=3 uid="uid://dspfwj2nuwal"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_smbo0"]
+[ext_resource type="Texture2D" uid="uid://c4pgkt6pcrjj2" path="res://art/redux/Backgrounds/black.png" id="1_ursum"]
+[ext_resource type="Texture2D" uid="uid://bxpkugbbv4efb" path="res://ui/rockets_logo.png" id="1_vpbwh"]
+[ext_resource type="Texture2D" uid="uid://cffajypy2jlhd" path="res://art/spaceMissiles_006.png" id="2_rssrk"]
+[ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://fonts/Raleway/static/Raleway-Medium.ttf" id="4_7n502"]
+
+[sub_resource type="Theme" id="Theme_55n2x"]
+default_font = ExtResource("4_7n502")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3a7g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scs8m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5wuo"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_smbo0")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ursum")
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -214.0
+offset_right = 149.0
+offset_bottom = -132.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vpbwh")
+
+[node name="MissleIcon" type="TextureRect" parent="Title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.984
+anchor_top = 0.342
+anchor_right = 1.036
+anchor_bottom = 0.475
+offset_left = -3.15201
+offset_top = -22.044
+offset_right = 13.092
+offset_bottom = 36.05
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -0.0882942
+texture = ExtResource("2_rssrk")
+expand_mode = 1
+
+[node name="ButtonsContainer" type="Node" parent="."]
+
+[node name="Play" type="Button" parent="ButtonsContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -71.0
+offset_right = 181.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7n502")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "Play"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="Quit" type="Button" parent="ButtonsContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = 151.0
+offset_right = 179.0
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7n502")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "Quit
+"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="Settings" type="Button" parent="ButtonsContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = 42.0
+offset_right = 181.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_7n502")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "Settings
+"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="MadeByLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_7n502")
+text = "Made By Mohit Sah"
+label_settings = SubResource("LabelSettings_c5wuo")
+
+[node name="VerisionNumber" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 144.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_7n502")
+text = " 1.0.0"
+label_settings = SubResource("LabelSettings_c5wuo")
+
+[connection signal="pressed" from="ButtonsContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ButtonsContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ButtonsContainer/Settings" to="." method="_on_settings_pressed"]

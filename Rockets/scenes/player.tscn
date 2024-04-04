@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqhot66fbv6a6"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r0rst"]
+[ext_resource type="Texture2D" uid="uid://du2j244sriicy" path="res://art/playerShip1_blue.png" id="2_pveh8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_plybu"]
+size = Vector2(101, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8epyx"]
+size = Vector2(102, 76)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+position = Vector2(573, 336)
+script = ExtResource("1_r0rst")
+normal_speed = 175.0
+max_forward_speed = 400.0
+
+[node name="Ship" type="Sprite2D" parent="."]
+z_index = 1
+rotation = -3.14159
+texture = ExtResource("2_pveh8")
+
+[node name="MovementHitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_plybu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ObstacleCollisionHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObstacleCollisionHitbox"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8epyx")
+debug_color = Color(0.898039, 0.298039, 0.286275, 0.419608)
+
+[connection signal="body_entered" from="ObstacleCollisionHitbox" to="." method="_on_obstacle_collision_hitbox_body_entered"]
