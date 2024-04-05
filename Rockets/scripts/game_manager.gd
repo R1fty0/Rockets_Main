@@ -4,4 +4,4 @@ var is_player_dead: bool = false
 
 func _process(delta):
 	if is_player_dead:
-		print("Game Over!")
+		get_tree().change_scene_to_file("res://scenes/game_over.tscn")

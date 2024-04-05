@@ -81,6 +81,8 @@ vertical_alignment = 1
 script = ExtResource("2_0cuol")
 
 [node name="Player" parent="." instance=ExtResource("2_yh7y4")]
+boost_meter_drain = 2.0
+turn_speed = 3.0
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true

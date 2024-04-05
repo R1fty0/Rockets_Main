@@ -13,8 +13,6 @@ size = Vector2(102, 76)
 z_index = 1
 position = Vector2(573, 336)
 script = ExtResource("1_r0rst")
-normal_speed = 175.0
-max_forward_speed = 400.0
 
 [node name="Ship" type="Sprite2D" parent="."]
 z_index = 1

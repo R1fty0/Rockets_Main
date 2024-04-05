@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://qx34hj4gq1bj"]
+[gd_scene load_steps=16 format=3 uid="uid://qx34hj4gq1bj"]
 
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="1_fo877"]
 [ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://fonts/Raleway/static/Raleway-Medium.ttf" id="2_urjl1"]
@@ -55,6 +55,9 @@ font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2k1iw"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lybaq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="ShipSelect" type="CanvasLayer"]
 
@@ -241,16 +244,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
 
-[node name="LeftArrow" type="TextureRect" parent="ShipVisualBox"]
-layout_mode = 0
-offset_left = -55.0
-offset_top = 61.0
-offset_right = 9.0
-offset_bottom = 125.0
-scale = Vector2(2, 2)
-texture = ExtResource("3_f0ckf")
-expand_mode = 1
-
 [node name="RightArrow" type="TextureRect" parent="ShipVisualBox"]
 layout_mode = 1
 anchors_preset = 1
@@ -264,3 +257,13 @@ grow_horizontal = 0
 scale = Vector2(2, 2)
 texture = ExtResource("4_y2aq8")
 expand_mode = 1
+
+[node name="LeftArrowButton" type="Button" parent="ShipVisualBox"]
+layout_mode = 0
+offset_left = -25.0
+offset_top = 88.0
+offset_right = 39.0
+offset_bottom = 160.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_lybaq")
+icon = ExtResource("3_f0ckf")
+icon_alignment = 1

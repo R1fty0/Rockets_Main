@@ -1,25 +1,19 @@
-extends CharacterBody2D
+extends CharacterBody2D 
 
-@export var speed = 100.0
-@export var drag_factor = 2
+@export var missile_speed = 200.0
+@export var turning_coefficent = 1
 @onready var player = $"../Player"
 
-var current_velocity = Vector2.ZERO
-
 func _ready():
-	current_velocity = speed * Vector2.RIGHT.rotated(rotation).normalized()
-	
+	if turning_coefficent > 1:
+		print("Turning coefficent of missle greater than 1. Expect weird homing behavior!")
 
 func _physics_process(delta):
-	var direction := Vector2.RIGHT.rotated(rotation).normalized()
+	if player == null:
+		return
+	_homing()
 	
-	if player != null:
-		direction = global_position.direction_to(player.global_position)
-		
-	var desired_velocity = direction * speed
-	var previous_velocity = current_velocity
-	var change = (desired_velocity - current_velocity) * drag_factor
-	current_velocity += change
-	velocity = current_velocity
-	look_at(global_position + current_velocity)
+func _homing():
+	rotation = lerp_angle(rotation, position.angle_to_point(player.position) + PI/2, turning_coefficent)
+	velocity = position.direction_to(player.position) * missile_speed
 	move_and_slide()
