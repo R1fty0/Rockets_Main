@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=3 format=3 uid="uid://x3dj00pgji1i"]
+
+[ext_resource type="Script" path="res://scripts/ship_data.gd" id="1_7tuic"]
+[ext_resource type="Texture2D" uid="uid://bnnrfcobp0byw" path="res://art/playerShip1_green.png" id="2_4xivs"]
+
+[resource]
+script = ExtResource("1_7tuic")
+ship_name = "Titan "
+ship_icon = ExtResource("2_4xivs")
+turning_value = 4
+boosting_value = 1
+speed_value = 4

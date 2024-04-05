@@ -1,9 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://qx34hj4gq1bj"]
+[gd_scene load_steps=18 format=3 uid="uid://qx34hj4gq1bj"]
 
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="1_fo877"]
 [ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://fonts/Raleway/static/Raleway-Medium.ttf" id="2_urjl1"]
-[ext_resource type="Texture2D" uid="uid://cirrgwktv0j4l" path="res://ui/flair_arrows_left.png" id="3_f0ckf"]
-[ext_resource type="Texture2D" uid="uid://bnepuab40biko" path="res://ui/flair_arrows_right.png" id="4_y2aq8"]
+[ext_resource type="Script" path="res://scripts/ship_select_manager.gd" id="3_sx04b"]
+[ext_resource type="Resource" uid="uid://q6c3dxthdygf" path="res://resources/red_ship_data.tres" id="4_wd8c0"]
+[ext_resource type="Resource" uid="uid://x3dj00pgji1i" path="res://resources/green_ship_data.tres" id="5_30u4e"]
+[ext_resource type="Resource" uid="uid://c2lcs0xcjohyf" path="res://resources/blue_ship_data.tres" id="6_nvmrs"]
+[ext_resource type="Resource" uid="uid://b06qswf6ybcke" path="res://resources/orange_ship_data.tres" id="7_mcimj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a87os"]
 font = ExtResource("2_urjl1")
@@ -55,9 +58,6 @@ font_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2k1iw"]
 bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lybaq"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="ShipSelect" type="CanvasLayer"]
 
@@ -244,26 +244,55 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
 
-[node name="RightArrow" type="TextureRect" parent="ShipVisualBox"]
+[node name="LeftButton" type="Button" parent="ShipVisualBox"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -15.5
+offset_right = -21.0
+offset_bottom = 15.5
+grow_vertical = 2
+text = "Left
+"
+
+[node name="RightButton" type="Button" parent="ShipVisualBox"]
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -75.0
-offset_top = 62.0
-offset_right = -11.0
-offset_bottom = 126.0
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -14.5
+offset_right = 67.0
+offset_bottom = 16.5
 grow_horizontal = 0
-scale = Vector2(2, 2)
-texture = ExtResource("4_y2aq8")
+grow_vertical = 2
+text = "Right"
+
+[node name="ShipIcon" type="TextureRect" parent="ShipVisualBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.5
+offset_top = -99.5
+offset_right = 81.5
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 
-[node name="LeftArrowButton" type="Button" parent="ShipVisualBox"]
-layout_mode = 0
-offset_left = -25.0
-offset_top = 88.0
-offset_right = 39.0
-offset_bottom = 160.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_lybaq")
-icon = ExtResource("3_f0ckf")
-icon_alignment = 1
+[node name="ShipSelectManager" type="Node" parent="."]
+script = ExtResource("3_sx04b")
+red_ship_data = ExtResource("4_wd8c0")
+green_ship_data = ExtResource("5_30u4e")
+blue_ship_data = ExtResource("6_nvmrs")
+orange_ship_data = ExtResource("7_mcimj")
+
+[connection signal="pressed" from="ShipVisualBox/LeftButton" to="ShipSelectManager" method="_on_left_button_pressed"]
+[connection signal="pressed" from="ShipVisualBox/RightButton" to="ShipSelectManager" method="_on_right_button_pressed"]

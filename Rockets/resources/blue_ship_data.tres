@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=2 format=3 uid="uid://c2lcs0xcjohyf"]
+
+[ext_resource type="Script" path="res://scripts/ship_data.gd" id="1_8h602"]
+
+[resource]
+script = ExtResource("1_8h602")
+ship_name = ""
+turning_value = 0
+boosting_value = 0
+speed_value = 0
