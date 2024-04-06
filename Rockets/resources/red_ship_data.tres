@@ -7,6 +7,8 @@
 script = ExtResource("1_cymc6")
 ship_name = "Orion"
 ship_icon = ExtResource("2_8b60g")
-turning_value = 2
-boosting_value = 2
-speed_value = 3
+turning_value = 4
+boost_value = 1
+speed_value = 2
+cost = 0
+purchased_by_player = false

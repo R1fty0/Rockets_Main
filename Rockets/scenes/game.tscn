@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhvgka4fyi3cf"]
+[gd_scene load_steps=12 format=3 uid="uid://dhvgka4fyi3cf"]
 
 [ext_resource type="Script" path="res://scripts/time_alive_timer.gd" id="2_0cuol"]
 [ext_resource type="PackedScene" uid="uid://cqhot66fbv6a6" path="res://scenes/player.tscn" id="2_yh7y4"]
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="3_0ffh5"]
-[ext_resource type="PackedScene" uid="uid://bq3t7s2s0rduq" path="res://scenes/missle.tscn" id="4_t7whk"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_17twy"]
-[ext_resource type="Script" path="res://scenes/missile_spawner.gd" id="6_emudj"]
+[ext_resource type="Script" path="res://scripts/missile_spawner.gd" id="6_emudj"]
+[ext_resource type="Script" path="res://scripts/coin_spawner.gd" id="7_t0ann"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2dnjk"]
 
@@ -23,9 +23,13 @@ _data = {
 }
 point_count = 5
 
-[node name="Game" type="Node"]
+[sub_resource type="Curve2D" id="Curve2D_hlpch"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -116, 182, 0, 0, 0, 0, -59, -117, 0, 0, 0, 0, 1119, -142, 0, 0, 0, 0, 1277, 109, 0, 0, 0, 0, 1274, 737, 0, 0, 0, 0, 1058, 874, 0, 0, 0, 0, 46, 861, 0, 0, 0, 0, -107, 750, 0, 0, 0, 0, -123, 213)
+}
+point_count = 9
 
-[node name="Missle" parent="." instance=ExtResource("4_t7whk")]
+[node name="Game" type="Node"]
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = -1
@@ -95,15 +99,23 @@ turn_speed = 3.0
 unique_name_in_owner = true
 script = ExtResource("5_17twy")
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="MissileSpawner" type="Path2D" parent="."]
 curve = SubResource("Curve2D_tojrj")
 script = ExtResource("6_emudj")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="MissilePathFollow" type="PathFollow2D" parent="MissileSpawner"]
 position = Vector2(-43, -70)
 rotation = 0.0142633
 
-[node name="Timer" type="Timer" parent="Path2D"]
-autostart = true
+[node name="MissileTimer" type="Timer" parent="MissileSpawner"]
 
-[connection signal="timeout" from="Path2D/Timer" to="Path2D" method="_on_timer_timeout"]
+[node name="CoinSpawner" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hlpch")
+script = ExtResource("7_t0ann")
+max_number_of_coins = 5
+
+[node name="CoinPathFollow" type="PathFollow2D" parent="CoinSpawner"]
+position = Vector2(-116, 182)
+rotation = -1.38242
+
+[connection signal="timeout" from="MissileSpawner/MissileTimer" to="MissileSpawner" method="_on_timer_timeout"]

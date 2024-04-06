@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+# Data
+@export var player_data: PlayerData
+
 # Speed
 @export var normal_speed = 100.0
 @export var max_forward_speed = 200.0
@@ -10,6 +13,7 @@ extends CharacterBody2D
 @export var boost_meter_drain = 4.0
 @export var boost_meter_recharge = 2.0
 @onready var boost_meter = $"../UI/BoostLabel/BoostMeter"
+
 
 # Rotation
 @export var turn_speed = 5.0 
@@ -40,13 +44,7 @@ func _turning(delta):
 		rotate(turn_speed * -1 * delta)
 	
 func _boosting():
-	# Slow down using boost
-	if Input.is_action_pressed("boost_backward") && boost_meter.value >= boost_meter_drain:
-		acceleration = boosting_acceleration * -1 
-		# Drain boost meter 
-		boost_meter.value -= boost_meter_drain
-	# Speed up using boost
-	elif Input.is_action_pressed("boost_forward") && boost_meter.value >= boost_meter_drain:
+	if Input.is_action_pressed("boost_forward") && boost_meter.value >= boost_meter_drain:
 		acceleration = boosting_acceleration 
 		# Drain boost meter 
 		boost_meter.value -= boost_meter_drain

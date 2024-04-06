@@ -13,7 +13,6 @@ func _ready():
 		print("Turning coefficent of missle greater than 1. Expect weird homing behavior!")
 
 func _physics_process(delta):
-	print(timer.time_left)
 	if player == null:
 		return
 	_homing()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://qx34hj4gq1bj"]
+[gd_scene load_steps=19 format=3 uid="uid://qx34hj4gq1bj"]
 
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="1_fo877"]
 [ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://fonts/Raleway/static/Raleway-Medium.ttf" id="2_urjl1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://x3dj00pgji1i" path="res://resources/green_ship_data.tres" id="5_30u4e"]
 [ext_resource type="Resource" uid="uid://c2lcs0xcjohyf" path="res://resources/blue_ship_data.tres" id="6_nvmrs"]
 [ext_resource type="Resource" uid="uid://b06qswf6ybcke" path="res://resources/orange_ship_data.tres" id="7_mcimj"]
+[ext_resource type="Resource" uid="uid://dyxnnc1syovdj" path="res://resources/player_data.tres" id="8_qrw8u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a87os"]
 font = ExtResource("2_urjl1")
@@ -100,7 +101,7 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_urjl1")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_tvhmj")
-text = "START/BUY"
+text = "START"
 icon = SubResource("AtlasTexture_or3jq")
 
 [node name="ShipInfoBox" type="Panel" parent="."]
@@ -279,13 +280,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.5
-offset_top = -99.5
-offset_right = 81.5
-offset_bottom = 101.5
+offset_left = -53.5
+offset_top = -50.5
+offset_right = 53.5
+offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 1
 
 [node name="ShipSelectManager" type="Node" parent="."]
 script = ExtResource("3_sx04b")
@@ -293,6 +293,7 @@ red_ship_data = ExtResource("4_wd8c0")
 green_ship_data = ExtResource("5_30u4e")
 blue_ship_data = ExtResource("6_nvmrs")
 orange_ship_data = ExtResource("7_mcimj")
+player_data = ExtResource("8_qrw8u")
 
 [connection signal="pressed" from="ShipVisualBox/LeftButton" to="ShipSelectManager" method="_on_left_button_pressed"]
 [connection signal="pressed" from="ShipVisualBox/RightButton" to="ShipSelectManager" method="_on_right_button_pressed"]

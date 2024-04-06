@@ -7,6 +7,8 @@
 script = ExtResource("1_7tuic")
 ship_name = "Titan "
 ship_icon = ExtResource("2_4xivs")
-turning_value = 4
-boosting_value = 1
-speed_value = 4
+turning_value = 2
+boost_value = 4
+speed_value = 2
+cost = 0
+purchased_by_player = false

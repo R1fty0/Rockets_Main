@@ -7,6 +7,8 @@
 script = ExtResource("1_2tmse")
 ship_name = "Zenith "
 ship_icon = ExtResource("2_0nffl")
-turning_value = 4
-boosting_value = 2
-speed_value = 3
+turning_value = 2
+boost_value = 2
+speed_value = 4
+cost = 0
+purchased_by_player = false
