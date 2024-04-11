@@ -15,12 +15,15 @@ extends CharacterBody2D
 @onready var boost_meter = $"../UI/BoostLabel/BoostMeter"
 
 
+
 # Rotation
 @export var turn_speed = 5.0 
 
 var acceleration = 1.0 
 
 func _ready():
+	if boost_meter == null:
+		print("Check the scene you are running! No boost meter found. ")
 	# Fill boost meter 
 	boost_meter.value = 100
 

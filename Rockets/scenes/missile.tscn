@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq3t7s2s0rduq"]
+
+[ext_resource type="Script" path="res://scripts/missile.gd" id="1_u2kdp"]
+[ext_resource type="Texture2D" uid="uid://cffajypy2jlhd" path="res://art/spaceMissiles_006.png" id="2_n56u2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84vcn"]
+size = Vector2(20, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22tt8"]
+size = Vector2(20, 43)
+
+[node name="Missile" type="CharacterBody2D"]
+script = ExtResource("1_u2kdp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n56u2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_84vcn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[node name="MissileCollisionHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MissileCollisionHitbox"]
+position = Vector2(25, 1)
+shape = SubResource("RectangleShape2D_22tt8")
+debug_color = Color(0.894118, 0, 0.784314, 0.419608)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="MissileCollisionHitbox" to="." method="_on_missile_collision_hitbox_body_entered"]

@@ -6,10 +6,12 @@ extends Path2D
 # Spawner Settings
 @export var max_number_of_coins: int
 
+func _ready():
+	_spawn_coin()
+
 func _process(_delta):
 	# Spawn more coins if there isn't the maximum number in the scene 
 	if get_children().size() - 1 <= max_number_of_coins:
-		print(get_children().size())
 		_spawn_coin()
 
 func _spawn_coin():

@@ -108,6 +108,7 @@ position = Vector2(-43, -70)
 rotation = 0.0142633
 
 [node name="MissileTimer" type="Timer" parent="MissileSpawner"]
+autostart = true
 
 [node name="CoinSpawner" type="Path2D" parent="."]
 curve = SubResource("Curve2D_hlpch")

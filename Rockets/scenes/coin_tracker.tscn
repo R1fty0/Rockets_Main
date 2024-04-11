@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cecb76syiga4x"]
+
+[ext_resource type="Script" path="res://scripts/coin_tracker.gd" id="1_kdv38"]
+[ext_resource type="Texture2D" uid="uid://quqr4g6eral5" path="res://ui/flair_arrow_short.png" id="2_mma7s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qsm2n"]
+radius = 734.621
+
+[node name="CoinTracker" type="Area2D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_kdv38")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qsm2n")
+
+[node name="TrackerIcon" type="Sprite2D" parent="."]
+scale = Vector2(1.33813, 1.24438)
+texture = ExtResource("2_mma7s")

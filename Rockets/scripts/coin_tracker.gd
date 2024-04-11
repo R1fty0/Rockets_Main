@@ -1,25 +1,28 @@
 extends Area2D
 
 @onready var icon = $TrackerIcon
-@export var distance_from_player = 15
+@export var distance_from_player = 30
 
-var target_coin
+@onready var coin_spawner = get_node("/root/Game/CoinSpawner")
+
+var target_coin: Area2D
 
 func _process(_delta):
 	# Get a new target coin if one isn't set 
-	if target_coin == null: 
+	if target_coin == null:
 		get_target_coin()
-	# Get direction to coin
+	update_icon() 
+
+func update_icon():
 	var coin_direction = Vector2.ZERO.direction_to(target_coin.global_position)
-	# Set icon position 
+	# Set gun position 
 	icon.position = coin_direction * distance_from_player
-	# Set icon rotation 
+	# Set gun rotation 
 	icon.rotation = coin_direction.angle() 
 
 func get_target_coin():
-	# Get coins in rage
-	var coins_in_range = get_overlapping_areas()
-	# Get position of closest coin 
-	if coins_in_range.size() > 1:
-		target_coin = coins_in_range[0]
+	# Get all coins 
+	var coins = coin_spawner.get_children()
 	
+	# Target the first coin in the array 
+	target_coin = coins[1]

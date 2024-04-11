@@ -25,3 +25,9 @@ func _homing():
 func _on_timer_timeout():
 	# Destroy missle when timer runs out 
 	queue_free()
+
+func _on_missile_collision_hitbox_body_entered(body):
+	# Destroy missile if it collides with another missle 
+	if (body.name == "Missle"):
+		print("Boom!")
+		queue_free()
