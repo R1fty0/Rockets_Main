@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://qx34hj4gq1bj"]
+[gd_scene load_steps=20 format=3 uid="uid://qx34hj4gq1bj"]
 
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="1_fo877"]
 [ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://fonts/Raleway/static/Raleway-Medium.ttf" id="2_urjl1"]
+[ext_resource type="Script" path="res://scripts/action_button.gd" id="3_guhf2"]
 [ext_resource type="Script" path="res://scripts/ship_select_manager.gd" id="3_sx04b"]
 [ext_resource type="Resource" uid="uid://q6c3dxthdygf" path="res://resources/red_ship_data.tres" id="4_wd8c0"]
 [ext_resource type="Resource" uid="uid://x3dj00pgji1i" path="res://resources/green_ship_data.tres" id="5_30u4e"]
@@ -103,6 +104,7 @@ theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_tvhmj")
 text = "START"
 icon = SubResource("AtlasTexture_or3jq")
+script = ExtResource("3_guhf2")
 
 [node name="ShipInfoBox" type="Panel" parent="."]
 anchors_preset = 7

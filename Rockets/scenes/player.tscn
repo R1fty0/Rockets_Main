@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqhot66fbv6a6"]
+[gd_scene load_steps=8 format=3 uid="uid://cqhot66fbv6a6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r0rst"]
 [ext_resource type="Texture2D" uid="uid://du2j244sriicy" path="res://art/playerShip1_blue.png" id="2_pveh8"]
-[ext_resource type="Resource" uid="uid://dyxnnc1syovdj" path="res://resources/player_data.tres" id="2_vrqm2"]
 [ext_resource type="Script" path="res://scripts/coin_tracker.gd" id="4_pva2n"]
 [ext_resource type="Texture2D" uid="uid://quqr4g6eral5" path="res://ui/flair_arrow_short.png" id="5_vce2r"]
 
@@ -19,7 +18,6 @@ radius = 734.621
 z_index = 1
 position = Vector2(573, 336)
 script = ExtResource("1_r0rst")
-player_data = ExtResource("2_vrqm2")
 
 [node name="Ship" type="Sprite2D" parent="."]
 z_index = 1
@@ -51,5 +49,7 @@ shape = SubResource("CircleShape2D_qsm2n")
 position = Vector2(78, 3)
 scale = Vector2(1.33813, 1.24438)
 texture = ExtResource("5_vce2r")
+
+[node name="RechargePauseTimer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="ObstacleCollisionHitbox" to="." method="_on_obstacle_collision_hitbox_body_entered"]

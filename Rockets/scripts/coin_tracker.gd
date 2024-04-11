@@ -1,25 +1,29 @@
 extends Area2D
 
-@onready var icon = $TrackerIcon
-@export var distance_from_player = 15
 
-var target_coin
+const _MAX_DIST := INF
 
-func _process(_delta):
-	# Get a new target coin if one isn't set 
-	if target_coin == null: 
-		get_target_coin()
-	# Get direction to coin
-	var coin_direction = Vector2.ZERO.direction_to(target_coin.global_position)
-	# Set icon position 
-	icon.position = coin_direction * distance_from_player
-	# Set icon rotation 
-	icon.rotation = coin_direction.angle() 
 
-func get_target_coin():
-	# Get coins in rage
-	var coins_in_range = get_overlapping_areas()
-	# Get position of closest coin 
-	if coins_in_range.size() > 1:
-		target_coin = coins_in_range[0]
+func _process(_delta: float) -> void:
+	var coin := get_closest_coin()
 	
+	if coin == null:
+		return
+	
+	var angle := global_position.angle_to_point(coin.global_position)
+	global_rotation = angle
+
+
+func get_closest_coin() -> Area2D:
+	var closest_coin: Area2D
+	var closest_dist := _MAX_DIST
+	
+	for coin in get_tree().get_nodes_in_group(&"coins"):
+		var coin_pos: Vector2 = coin.global_position
+		var player_pos: Vector2 = get_parent().global_position
+		var dist := coin_pos.distance_to(player_pos)
+		if dist < closest_dist:
+			closest_dist = dist
+			closest_coin = coin
+	
+	return closest_coin

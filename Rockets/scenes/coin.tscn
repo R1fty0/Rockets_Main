@@ -28,7 +28,7 @@ _data = {
 "coin": SubResource("Animation_10wst")
 }
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" groups=["coins"]]
 collision_layer = 3
 script = ExtResource("1_1o2t7")
 
