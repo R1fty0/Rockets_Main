@@ -1,94 +1,99 @@
 extends CharacterBody2D
 
-const NORMAL_SPEED = 100.0
-const MAX_SPEED = 200.0
-const TURN_SPEED = 5.0
+const NORMAL_SPEED: float = 100.0
+const BOOST_SPEED: float = 200.0
+const TURN_SPEED: float = 5.0 
 
-const BOOST_ACCELERATION = 5.0
-const NORMAL_ACCELERATION = 1.0
+const BOOST_COOLDOWN: float = 3.0 
+const BOOST_DRAIN_RATE: float = 2.0
+const BOOST_RECHARGE_RATE: float = 4.0
 
-@export var player_data: PlayerData 
+@onready var current_speed: float = 0.0
+@onready var turning_speed_coefficent: float = 0.0 
 
-# References 
+@onready var turn_direction: TurningDirection = TurningDirection.NONE
+@onready var boost_state: BoostState = BoostState.NOT_BOOSTING
+
+@onready var recharge_pause_timer = $RechargePauseTimer
 @onready var boost_meter = $"../UI/BoostLabel/BoostMeter"
-@onready var timer := $RechargePauseTimer
 
-enum BoostMode {
-	RECHARGING,      #// Can boost, but not currently.
-	BOOSTING,        #// Actively boosting
-	RECHARGE_PAUSE,  #// Recharge pause
+enum TurningDirection
+{
+	NONE,
+	LEFT,
+	RIGHT
 }
 
-const MAX_BOOST = 1000.0
-const BOOST_DRAIN_RATE = 400.0
-const BOOST_RECHARGE_RATE = 200.0
-const BOOST_RECHARGE_PAUSE_DURATION = 3.0
-const BOOST_FACTOR_RECHARGING = 1.0 #// This is the default state, so probably keep this at 1.
-const BOOST_FACTOR_BOOSTING = 4.0 #// Basic boost factor.
-const BOOST_FACTOR_RECHARGE_PAUSE = 1.0  #// If you want the player to move slower when recharging boost, change this.
+enum BoostState
+{
+	NOT_BOOSTING,
+	BOOSTING,
+	RECHARGING
+}
 
-var boost_mode = BoostMode.RECHARGING
-var boost_charge = 0.0
 
 func _ready():
-	# Fill boost meter 
+	current_speed = NORMAL_SPEED
 	boost_meter.value = 100
-	# Set boost recharge timer wait time
-	timer.wait_time = BOOST_RECHARGE_PAUSE_DURATION
+	recharge_pause_timer.wait_time = BOOST_COOLDOWN
 	
 func _physics_process(delta):
-	var input_dir = float(Input.is_action_pressed("boost_forward"))
+	input()
+	_move()
 	_turning(delta)
-	var boost_factor = boost(delta)
-	velocity = Vector2(0, 1).rotated(rotation) * input_dir * boost_factor * 100
-	move_and_slide()
-	print(str(velocity))
-
 	
-func _turning(delta):
-	# Turn left
+
+
+func _boosting():
+	match boost_state:
+		BoostState.NOT_BOOSTING: 
+			current_speed = NORMAL_SPEED
+		BoostState.BOOSTING:
+			# Apply boost 
+			current_speed = BOOST_SPEED
+			boost_meter.value -= BOOST_DRAIN_RATE
+			# Stop boosting when meter is drained, invoke cooldown
+			if boost_meter.value <= 0.0:
+				boost_state = BoostState.RECHARGING
+				recharge_pause_timer.start()
+		BoostState.RECHARGING:
+			current_speed = NORMAL_SPEED
+			boost_meter.value += BOOST_RECHARGE_RATE
+
+func _move():
+	velocity = Vector2(0, 1).rotated(rotation) * current_speed
+	move_and_slide()
+	
+# Made my own input function, will learn about Godot's built in system soon 
+func input():
+	# Boost input
+	if Input.is_action_pressed("boost_forward"):
+		boost_state == BoostState.BOOSTING
+		
+	# Turn input 
 	if Input.is_action_pressed("turn_left"):
-		rotate(TURN_SPEED * delta)
-	# Turn right 
-	if Input.is_action_pressed("turn_right"):
-		rotate(TURN_SPEED * -1 * delta)
+		turn_direction = TurningDirection.LEFT
+	elif Input.is_action_pressed("turn_right"):
+		turn_direction = TurningDirection.RIGHT		
+	else:
+		turn_direction = TurningDirection.NONE	
 
-func _input(event) -> void:
-	if Input.is_action_pressed("boost_forward") and boost_mode == BoostMode.RECHARGING:
-		set_boost_mode(BoostMode.BOOSTING)
-	elif Input.is_action_just_released("boost_forward") and boost_mode == BoostMode.BOOSTING:
-		set_boost_mode(BoostMode.RECHARGE_PAUSE)
-
-#// Call every frame
-func boost(delta) -> float:
-	var boost_factor = 1.0
-	match boost_mode:
-		BoostMode.RECHARGING:
-			boost_factor = BOOST_FACTOR_RECHARGING
-			boost_charge = min(boost_charge + BOOST_RECHARGE_RATE * delta, MAX_BOOST)
-
-		BoostMode.BOOSTING:
-			boost_factor = BOOST_FACTOR_BOOSTING
-			boost_charge -= BOOST_DRAIN_RATE * delta
-			if boost_charge < 0.0:
-				set_boost_mode(BoostMode.RECHARGE_PAUSE)
-
-		BoostMode.RECHARGE_PAUSE:
-			boost_factor = BOOST_FACTOR_RECHARGE_PAUSE
-			if timer.time_left == 0.0:
-				set_boost_mode(BoostMode.RECHARGING)
-	return boost_factor
-
-func set_boost_mode(new_mode):
-	boost_mode = new_mode
-
-	match boost_mode:
-		BoostMode.RECHARGING:
-			boost_charge = min(boost_charge, 0.0)
-		BoostMode.RECHARGE_PAUSE:
-			timer.start(BOOST_RECHARGE_PAUSE_DURATION)
+func _turning(delta):
+	if turn_direction == TurningDirection.NONE:
+		return
+	# Determine turning direction 
+	if turn_direction == TurningDirection.LEFT:
+		turning_speed_coefficent = -1
+	else: 
+		turning_speed_coefficent = 1
+	# Apply rotation 
+	rotate(TURN_SPEED * turning_speed_coefficent * delta)
 
 func _on_obstacle_collision_hitbox_body_entered(body):
 	# End the game if the player is hit by a missle 
 	if body.name == "Missle":
 		%GameManager.is_player_dead = true
+
+
+func _on_recharge_pause_timer_timeout():
+	boost_state = BoostState.NOT_BOOSTING

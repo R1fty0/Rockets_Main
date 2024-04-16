@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cqhot66fbv6a6" path="res://scenes/player.tscn" id="2_yh7y4"]
 [ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://art/darkPurple.png" id="3_0ffh5"]
 [ext_resource type="Texture2D" uid="uid://bqc757n5lyfvc" path="res://art/tile_coin.png" id="3_66ifj"]
-[ext_resource type="Resource" uid="uid://dyxnnc1syovdj" path="res://resources/player_data.tres" id="5_8y0p2"]
+[ext_resource type="Script" path="res://scripts/coin_count.gd" id="4_bwjry"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_17twy"]
 [ext_resource type="Script" path="res://scripts/missile_spawner.gd" id="6_emudj"]
 [ext_resource type="Script" path="res://scripts/coin_spawner.gd" id="7_t0ann"]
@@ -102,7 +102,7 @@ offset_right = 82.0
 offset_bottom = 75.0
 texture = ExtResource("3_66ifj")
 
-[node name="Label" type="Label" parent="UI/CoinsCollectedIcon"]
+[node name="CoinCount" type="Label" parent="UI/CoinsCollectedIcon"]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 7.0
@@ -112,9 +112,9 @@ text = "0"
 label_settings = SubResource("LabelSettings_suivm")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("4_bwjry")
 
 [node name="Player" parent="." instance=ExtResource("2_yh7y4")]
-player_data = ExtResource("5_8y0p2")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
