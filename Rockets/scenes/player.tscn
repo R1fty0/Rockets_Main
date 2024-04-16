@@ -16,7 +16,7 @@ radius = 734.621
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-position = Vector2(573, 336)
+position = Vector2(649, 336)
 script = ExtResource("1_r0rst")
 
 [node name="Ship" type="Sprite2D" parent="."]
