@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dspfwj2nuwal"]
+[gd_scene load_steps=15 format=3 uid="uid://dspfwj2nuwal"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_smbo0"]
 [ext_resource type="Texture2D" uid="uid://c4pgkt6pcrjj2" path="res://art/redux/Backgrounds/black.png" id="1_ursum"]
@@ -24,6 +24,100 @@ corner_radius_bottom_left = 6
 [sub_resource type="AtlasTexture" id="AtlasTexture_scs8m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c5wuo"]
+
+[sub_resource type="Animation" id="Animation_kqoi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SceneTransition/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fw500"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SceneTransition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SceneTransition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sphuj"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SceneTransition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SceneTransition/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyl3y"]
+_data = {
+"RESET": SubResource("Animation_kqoi8"),
+"fade_in": SubResource("Animation_fw500"),
+"fade_out": SubResource("Animation_sphuj")
+}
+
+[sub_resource type="GDScript" id="GDScript_mywc7"]
+script/source = "extends AnimationPlayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	play(\"fade_in\")
+	
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_smbo0")
@@ -159,6 +253,19 @@ theme_override_fonts/font = ExtResource("4_7n502")
 text = " 1.0.0"
 label_settings = SubResource("LabelSettings_c5wuo")
 
+[node name="SceneTransition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uyl3y")
+}
+script = SubResource("GDScript_mywc7")
+
+[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+self_modulate = Color(0, 0, 0, 1)
+offset_right = 1146.0
+offset_bottom = 649.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="ButtonsContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="ButtonsContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="ButtonsContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="animation_finished" from="SceneTransition" to="." method="_on_scene_transition_animation_finished"]
