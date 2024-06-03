@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://btllc6ejl43c4"]
+
+[ext_resource type="Script" path="res://scripts/cursor_controller.gd" id="1_qwsmb"]
+[ext_resource type="AudioStream" uid="uid://cqan0isuxyv1p" path="res://assets/art/redux/Bonus/sfx_zap.ogg" id="2_uaj0v"]
+
+[node name="CursorController" type="Node"]
+script = ExtResource("1_qwsmb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_uaj0v")

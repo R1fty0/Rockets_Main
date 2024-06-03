@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=3 format=3 uid="uid://x3dj00pgji1i"]
+
+[ext_resource type="Texture2D" uid="uid://bld1luuf7qmka" path="res://assets/art/playerShip1_orange.png" id="1_w82bi"]
+[ext_resource type="Script" path="res://scripts/resources/ship_data.gd" id="2_r32ch"]
+
+[resource]
+script = ExtResource("2_r32ch")
+name = "Nova"
+image = ExtResource("1_w82bi")
+cost = 20
+turn_speed = 8
+boost_multiplier = 2
+boost_charge = 2

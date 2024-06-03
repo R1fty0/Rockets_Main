@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=3 format=3 uid="uid://b06qswf6ybcke"]
+
+[ext_resource type="Texture2D" uid="uid://du2j244sriicy" path="res://assets/art/playerShip1_blue.png" id="1_hykv5"]
+[ext_resource type="Script" path="res://scripts/resources/ship_data.gd" id="2_4gl1p"]
+
+[resource]
+script = ExtResource("2_4gl1p")
+name = "Discovery"
+image = ExtResource("1_hykv5")
+cost = 150
+turn_speed = 5
+boost_multiplier = 2
+boost_charge = 4

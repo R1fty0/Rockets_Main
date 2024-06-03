@@ -1,0 +1,13 @@
+- save/load system
+- missile explosion and trails
+- game over menu
+- sounds
+- about 
+
+If time permits: 
+	- transitions
+	- missiles and coins spawning relative to player 
+	- settings menu
+	
+Complete:
+	- settings menu

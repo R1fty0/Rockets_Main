@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerInventory" load_steps=2 format=3 uid="uid://bx1jbrb7teqea"]
+
+[ext_resource type="Script" path="res://scripts/resources/player_inventory.gd" id="1_tbq06"]
+
+[resource]
+script = ExtResource("1_tbq06")
+coin_balance = 0
+high_score = 0.0
+most_missiles_avoided = 0
+most_coins_collected = 0

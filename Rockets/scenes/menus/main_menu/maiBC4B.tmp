@@ -1,0 +1,154 @@
+[gd_scene load_steps=13 format=3 uid="uid://dspfwj2nuwal"]
+
+[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_ts4xw"]
+[ext_resource type="Texture2D" uid="uid://c4pgkt6pcrjj2" path="res://assets/art/redux/Backgrounds/black.png" id="2_7n4b4"]
+[ext_resource type="Texture2D" uid="uid://bxpkugbbv4efb" path="res://assets/ui/rockets_logo.png" id="3_4o2ki"]
+[ext_resource type="Texture2D" uid="uid://cffajypy2jlhd" path="res://assets/art/spaceMissiles_006.png" id="4_t2c8t"]
+[ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://assets/fonts/Raleway/static/Raleway-Medium.ttf" id="5_fuydr"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="6_3fp6b"]
+[ext_resource type="AudioStream" uid="uid://bnfc56hxx0kta" path="res://assets/sounds/universal-revo-main-version-17642-03-23.mp3" id="7_4tf1j"]
+[ext_resource type="Script" path="res://scripts/cursor_controller.gd" id="8_htxbu"]
+
+[sub_resource type="Theme" id="Theme_55n2x"]
+default_font = ExtResource("5_fuydr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3a7g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scs8m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c5wuo"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_ts4xw")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7n4b4")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -189.0
+offset_right = -201.0
+offset_bottom = -107.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4o2ki")
+
+[node name="MissileIcon" type="TextureRect" parent="Title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.984
+anchor_top = 0.342
+anchor_right = 1.036
+anchor_bottom = 0.475
+offset_left = -12.152
+offset_top = -16.044
+offset_right = 4.09201
+offset_bottom = 42.05
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -0.0882942
+texture = ExtResource("4_t2c8t")
+stretch_mode = 3
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+offset_left = 72.0
+offset_top = 258.0
+offset_right = 217.0
+offset_bottom = 456.0
+theme_override_constants/separation = 30
+
+[node name="Play" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_fuydr")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "Play"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="About" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_fuydr")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "About
+"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="Quit" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+theme = SubResource("Theme_55n2x")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_fuydr")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3a7g")
+text = "Quit
+"
+icon = SubResource("AtlasTexture_scs8m")
+
+[node name="MadeByLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_fuydr")
+text = "Made By Mohit Sah"
+label_settings = SubResource("LabelSettings_c5wuo")
+
+[node name="VerisionNumber" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 144.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_fuydr")
+text = " 1.2.0"
+label_settings = SubResource("LabelSettings_c5wuo")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_3fp6b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_4tf1j")
+autoplay = true
+
+[node name="CursorController" type="Node" parent="."]
+script = ExtResource("8_htxbu")
+
+[connection signal="pressed" from="ButtonsContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ButtonsContainer/About" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="ButtonsContainer/Quit" to="." method="_on_quit_pressed"]

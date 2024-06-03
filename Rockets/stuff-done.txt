@@ -1,0 +1,8 @@
+2024-06-01:
+	- redid project file structure 
+	- added a drop and fade transition, couldn't get it fully working 
+	- updated buttons for ship_select, animated ShipSelectText to add polish 
+	- made CoinCounter into own scene with script
+	- Fixed game_over menu buttons 
+	
+

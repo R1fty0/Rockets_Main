@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=3 format=3 uid="uid://q6c3dxthdygf"]
+
+[ext_resource type="Texture2D" uid="uid://crkjjxfldmfuq" path="res://assets/art/playerShip1_red.png" id="1_wv72i"]
+[ext_resource type="Script" path="res://scripts/resources/ship_data.gd" id="2_yfpdc"]
+
+[resource]
+script = ExtResource("2_yfpdc")
+name = "Orion"
+image = ExtResource("1_wv72i")
+cost = 0
+turn_speed = 5
+boost_multiplier = 2
+boost_charge = 2

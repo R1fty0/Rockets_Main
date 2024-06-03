@@ -1,0 +1,412 @@
+[gd_scene load_steps=39 format=3 uid="uid://qx34hj4gq1bj"]
+
+[ext_resource type="Texture2D" uid="uid://ct6u7rtgthsuc" path="res://assets/art/darkPurple.png" id="2_ooerp"]
+[ext_resource type="FontFile" uid="uid://c5h8l4c8372ss" path="res://assets/fonts/Raleway/static/Raleway-Medium.ttf" id="3_j5qyt"]
+[ext_resource type="FontFile" uid="uid://1vffflcbwhvn" path="res://assets/fonts/Raleway/static/Raleway-SemiBoldItalic.ttf" id="3_qr1n8"]
+[ext_resource type="FontFile" uid="uid://cqlr3eqg3oqtm" path="res://assets/fonts/Raleway/static/Raleway-ExtraBoldItalic.ttf" id="4_6ixgk"]
+[ext_resource type="Texture2D" uid="uid://wjsljmkdm77h" path="res://assets/art/kenney_game-icons-expansion/Game icons (base)/PNG/White/1x/arrowLeft.png" id="4_x3qst"]
+[ext_resource type="Texture2D" uid="uid://x5dm86oxqdhb" path="res://assets/art/kenney_game-icons-expansion/Game icons (base)/PNG/White/1x/arrowRight.png" id="5_epxbt"]
+[ext_resource type="Script" path="res://scenes/menus/ship_select/ship_select_manager.gd" id="5_xldpn"]
+[ext_resource type="Resource" uid="uid://q6c3dxthdygf" path="res://scripts/resources/orion.tres" id="6_8xjxl"]
+[ext_resource type="FontFile" uid="uid://2flvqemiirq5" path="res://assets/fonts/Raleway/static/Raleway-BoldItalic.ttf" id="6_bvfkq"]
+[ext_resource type="Resource" uid="uid://bx1jbrb7teqea" path="res://scripts/resources/player_inventory.tres" id="6_wf0g5"]
+[ext_resource type="FontFile" uid="uid://bpbpoj7m2alrp" path="res://assets/fonts/Raleway/static/Raleway-Regular.ttf" id="7_7ep5f"]
+[ext_resource type="Resource" uid="uid://x3dj00pgji1i" path="res://scripts/resources/nova.tres" id="7_tfntn"]
+[ext_resource type="Resource" uid="uid://c2lcs0xcjohyf" path="res://scripts/resources/frontier.tres" id="8_7c07u"]
+[ext_resource type="Resource" uid="uid://b06qswf6ybcke" path="res://scripts/resources/discovery.tres" id="9_s4fu7"]
+[ext_resource type="PackedScene" uid="uid://vxgtg5ig416d" path="res://scenes/ui/coin_counter.tscn" id="15_ulkac"]
+[ext_resource type="FontFile" uid="uid://drrgiuhilq7y6" path="res://assets/fonts/Raleway/static/Raleway-Bold.ttf" id="16_7uucc"]
+[ext_resource type="Texture2D" uid="uid://bqc757n5lyfvc" path="res://assets/art/tile_coin.png" id="16_teamc"]
+[ext_resource type="FontFile" uid="uid://btxfdeunhilpr" path="res://assets/fonts/Raleway/static/Raleway-Black.ttf" id="17_jywe7"]
+[ext_resource type="Script" path="res://scripts/save_and_load_system.gd" id="19_qabsf"]
+[ext_resource type="AudioStream" uid="uid://bpa5icwro6r88" path="res://assets/sounds/stardust-danijel-zambo-main-version-1372-03-13.mp3" id="20_yqges"]
+[ext_resource type="PackedScene" uid="uid://btllc6ejl43c4" path="res://scenes/instantiables/cursor_controller.tscn" id="21_reagy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a87os"]
+font = ExtResource("4_6ixgk")
+font_size = 48
+outline_size = 3
+outline_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="Animation" id="Animation_njwna"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(398, 78)]
+}
+
+[sub_resource type="Animation" id="Animation_rp7c6"]
+resource_name = "bob"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(398, 78), Vector2(398, 67), Vector2(398, 78)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8gaey"]
+_data = {
+"RESET": SubResource("Animation_njwna"),
+"bob": SubResource("Animation_rp7c6")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdt4c"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_size = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_ds6wt"]
+font = ExtResource("6_bvfkq")
+font_size = 31
+
+[sub_resource type="LabelSettings" id="LabelSettings_ifw01"]
+font = ExtResource("7_7ep5f")
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p3xss"]
+font = ExtResource("7_7ep5f")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_aru7a"]
+font = ExtResource("7_7ep5f")
+font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c5r5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2k1iw"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v523p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg7qp"]
+
+[sub_resource type="Theme" id="Theme_w82ra"]
+default_font = ExtResource("3_j5qyt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ktxr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llhnq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4vfcn"]
+font = ExtResource("17_jywe7")
+font_size = 32
+
+[node name="ShipSelect" type="CanvasLayer"]
+
+[node name="ShipSelectManager" type="Node" parent="."]
+script = ExtResource("5_xldpn")
+red_ship_data = ExtResource("6_8xjxl")
+green_ship_data = ExtResource("7_tfntn")
+blue_ship_data = ExtResource("8_7c07u")
+orange_ship_data = ExtResource("9_s4fu7")
+player_inventory = ExtResource("6_wf0g5")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ooerp")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="SelectShipText" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 398.0
+offset_top = 78.0
+offset_right = 774.0
+offset_bottom = 136.001
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_qr1n8")
+text = "Select Your Ship
+"
+label_settings = SubResource("LabelSettings_a87os")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SelectShipText"]
+libraries = {
+"": SubResource("AnimationLibrary_8gaey")
+}
+autoplay = "bob"
+speed_scale = 1.6
+
+[node name="ShipInfoBox" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -197.0
+offset_top = -203.0
+offset_right = 199.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
+
+[node name="ShipName" type="Label" parent="ShipInfoBox"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 7.0
+offset_right = 275.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("3_j5qyt")
+theme_override_font_sizes/font_size = 4
+text = "Ship Name"
+label_settings = SubResource("LabelSettings_ds6wt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Labels" type="Control" parent="ShipInfoBox"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TurnSpeed" type="Label" parent="ShipInfoBox/Labels"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 54.0
+offset_right = 108.0
+offset_bottom = 69.0
+grow_vertical = 2
+text = "Turn Speed"
+label_settings = SubResource("LabelSettings_ifw01")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoostMultiplier" type="Label" parent="ShipInfoBox/Labels"]
+layout_mode = 2
+offset_left = 25.0
+offset_top = 78.0
+offset_right = 110.0
+offset_bottom = 93.0
+grow_vertical = 2
+text = "Boost Multiplier
+"
+label_settings = SubResource("LabelSettings_p3xss")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoostCharge" type="Label" parent="ShipInfoBox/Labels"]
+layout_mode = 2
+offset_left = 32.0
+offset_top = 103.0
+offset_right = 108.0
+offset_bottom = 118.0
+grow_vertical = 2
+text = "Boost Charge
+"
+label_settings = SubResource("LabelSettings_aru7a")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Meters" type="Control" parent="ShipInfoBox"]
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 43.0
+
+[node name="TurnSpeedMeter" type="ProgressBar" parent="ShipInfoBox/Meters"]
+layout_mode = 2
+offset_left = 117.0
+offset_top = 54.0
+offset_right = 354.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_2c5r5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2k1iw")
+max_value = 8.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="BoostMultiplierMeter" type="ProgressBar" parent="ShipInfoBox/Meters"]
+layout_mode = 2
+offset_left = 117.0
+offset_top = 77.0
+offset_right = 354.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_v523p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2k1iw")
+max_value = 4.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="BoostChargeMeter" type="ProgressBar" parent="ShipInfoBox/Meters"]
+layout_mode = 2
+offset_left = 116.0
+offset_top = 103.0
+offset_right = 353.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_cg7qp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2k1iw")
+max_value = 4.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="ShipVisualBox" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -152.0
+offset_right = 117.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bdt4c")
+
+[node name="LeftButton" type="TextureButton" parent="ShipVisualBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -15.5
+offset_right = -21.0
+offset_bottom = 15.5
+grow_vertical = 2
+texture_normal = ExtResource("4_x3qst")
+
+[node name="RightButton" type="TextureButton" parent="ShipVisualBox"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -27.5
+offset_right = 66.0
+offset_bottom = 30.5
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("5_epxbt")
+
+[node name="ShipIcon" type="TextureRect" parent="ShipVisualBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.5
+offset_top = -50.5
+offset_right = 53.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CoinCounter" parent="." instance=ExtResource("15_ulkac")]
+
+[node name="ActionButton" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -73.0
+offset_right = -25.0
+offset_bottom = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = SubResource("Theme_w82ra")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("16_7uucc")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_7ktxr")
+text = "Play"
+icon = SubResource("AtlasTexture_llhnq")
+
+[node name="ShipPrice" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -111.0
+offset_right = -67.0
+offset_bottom = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+
+[node name="CoinIcon" type="TextureRect" parent="ShipPrice"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_teamc")
+
+[node name="PriceLabel" type="Label" parent="ShipPrice"]
+layout_mode = 0
+offset_left = 46.0
+offset_right = 86.0
+offset_bottom = 39.0
+text = "60"
+label_settings = SubResource("LabelSettings_4vfcn")
+
+[node name="SaveAndLoadSystem" type="Node" parent="."]
+script = ExtResource("19_qabsf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_yqges")
+autoplay = true
+
+[node name="CursorController" parent="." instance=ExtResource("21_reagy")]
+
+[connection signal="pressed" from="ShipVisualBox/LeftButton" to="ShipSelectManager" method="_on_left_button_pressed"]
+[connection signal="pressed" from="ShipVisualBox/RightButton" to="ShipSelectManager" method="_on_right_button_pressed"]
+[connection signal="button_down" from="ActionButton" to="ShipSelectManager" method="_on_action_button_button_down"]

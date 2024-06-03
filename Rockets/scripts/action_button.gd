@@ -2,7 +2,7 @@ extends Button
 
 # Need to rewrite entire ship select system before tackling this 
 @onready var ship_select_manager = $"../ShipSelectManager"
-const PLAYER_DATA = preload("res://resources/player_data.tres")
+const PLAYER_DATA = preload("res://scripts/resources/player_data.tres")
 var ship_ownership: ShipOwnership
 
 enum ShipOwnership

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq3t7s2s0rduq"]
+
+[ext_resource type="Script" path="res://scenes/instantiables/missile/missle.gd" id="1_3qots"]
+[ext_resource type="Texture2D" uid="uid://cffajypy2jlhd" path="res://assets/art/spaceMissiles_006.png" id="2_ls1il"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84vcn"]
+size = Vector2(20, 42)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdeoa"]
+radius = 12.0
+height = 46.0
+
+[node name="Missle" type="CharacterBody2D"]
+top_level = true
+rotation = 1.5708
+script = ExtResource("1_3qots")
+missile_speed = 150.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ls1il")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_84vcn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_xdeoa")
+debug_color = Color(0.960784, 0, 0.509804, 0.419608)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ShipData" load_steps=3 format=3 uid="uid://c2lcs0xcjohyf"]
+
+[ext_resource type="Texture2D" uid="uid://bnnrfcobp0byw" path="res://assets/art/playerShip1_green.png" id="1_7keem"]
+[ext_resource type="Script" path="res://scripts/resources/ship_data.gd" id="2_ka5vq"]
+
+[resource]
+script = ExtResource("2_ka5vq")
+name = "Frontier"
+image = ExtResource("1_7keem")
+cost = 60
+turn_speed = 5
+boost_multiplier = 4
+boost_charge = 2
